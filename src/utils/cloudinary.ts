@@ -1,5 +1,6 @@
 import cloudinary from "cloudinary";
-import { env } from "../config/env.js";
+import env from "../config/env";
+
 
 const cloud = cloudinary.v2;
 

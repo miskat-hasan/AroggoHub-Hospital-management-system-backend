@@ -11,4 +11,7 @@ export default {
   jwt_expires_in: (process.env.JWT_EXPIRES_IN as string) || "1d",
   gmail_user: process.env.GMAIL_USER as string,
   gmail_pass: process.env.GMAIL_PASSWORD as string,
+  cname: process.env.CLOUD_NAME as string,
+  capi_key: process.env.CLOUD_API_KEY as string,
+  capi_secret: process.env.CLOUD_API_SECRET as string,
 };
