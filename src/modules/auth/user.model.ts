@@ -11,16 +11,17 @@ const userSchema = new Schema<IUser>(
     gender: String,
     address: String,
     profile_picture: String,
-    hospital_id: String
+    hospital_id: String,
   },
   {
+    discriminatorKey: "roleKey",
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
         delete ret.password;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 

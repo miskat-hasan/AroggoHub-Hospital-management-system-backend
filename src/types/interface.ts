@@ -107,7 +107,7 @@ export interface IUser extends Document {
 // Role-based Profiles
 // ======================================================
 
-export interface IDoctor extends Document {
+export interface IDoctor extends IUser {
   doctor_id: Types.ObjectId;
   department_id?: Types.ObjectId;
   specialization?: string[];
@@ -121,7 +121,7 @@ export interface IDoctor extends Document {
   updatedAt?: Date;
 }
 
-export interface IPatient extends Document {
+export interface IPatient extends IUser {
   patient_id: Types.ObjectId;
   age?: number;
   blood_group?: string;
@@ -143,7 +143,7 @@ export interface IPatient extends Document {
   updatedAt?: Date;
 }
 
-export interface IReceptionist extends Document {
+export interface IReceptionist extends IUser {
   receptionist_id: Types.ObjectId;
   assigned_department?: Types.ObjectId;
   shift_time?: string;
@@ -152,7 +152,7 @@ export interface IReceptionist extends Document {
   updatedAt?: Date;
 }
 
-export interface INurse extends Document {
+export interface INurse extends IUser {
   nurse_id: Types.ObjectId;
   assigned_department?: Types.ObjectId;
   assigned_room?: Types.ObjectId;
@@ -162,7 +162,7 @@ export interface INurse extends Document {
   updatedAt?: Date;
 }
 
-export interface ILabStaff extends Document {
+export interface ILabStaff extends IUser {
   staff_id: Types.ObjectId;
   department_id?: Types.ObjectId;
   specialization?: string;
@@ -172,7 +172,7 @@ export interface ILabStaff extends Document {
   updatedAt?: Date;
 }
 
-export interface IAdmin extends Document {
+export interface IAdmin extends IUser {
   admin_id: Types.ObjectId;
   designation?: string;
   access_level: "super_admin" | "hospital_admin";

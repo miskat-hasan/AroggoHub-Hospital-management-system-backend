@@ -4,6 +4,10 @@ import { UserRole } from "./user.interface";
 import { DoctorModel } from "./doctor/doctor.model";
 import { PatientModel } from "./patient/patient.model";
 
+
+
+
+
 export const registerService = async (payload: any) => {
   const { name, email, password, role, ...rest } = payload;
 

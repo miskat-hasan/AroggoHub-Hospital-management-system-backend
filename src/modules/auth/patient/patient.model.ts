@@ -1,8 +1,14 @@
 import { Schema, model } from "mongoose";
+import { UserModel } from "../user.model";
 
 const patientSchema = new Schema(
   {
-    user_id: { type: Schema.Types.ObjectId, ref: "User", required: true, unique: true },
+    user_id: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true,
+    },
     age: Number,
     blood_group: String,
     occupation: String,
@@ -15,4 +21,4 @@ const patientSchema = new Schema(
   { timestamps: true }
 );
 
-export const PatientModel = model("Patient", patientSchema);
+export const PatientModel = UserModel.discriminator("Patient", patientSchema);
