@@ -1,10 +1,29 @@
 import { Router } from "express";
-import { AuthController } from "./auth.controller";
+import {
+  changePassword,
+  deleteUser,
+  forgetPassword,
+  login,
+  logout,
+  profile,
+  sendForgetPassCode,
+  sendVerificationCode,
+  updateUser,
+  verifyCode,
+} from "./auth.controller";
+import { User } from "../../middleware/auth";
 
-const router = Router()
+const router = Router();
 
-// router.post('/login',loginController)
-router.post('/register', AuthController.register)
-// router.post('/logout',logoutController)
+router.post("/sendSignUpCode", sendVerificationCode);
+router.post("/verifySignUpCode", verifyCode);
+router.post("/login", login);
+router.get("/profile", User, profile);
+router.put("/updateProfile", User, updateUser);
+router.put("/deleteUser", User, deleteUser);
+router.put("/changePassword", User, changePassword);
+router.post("/sendForgetPasswordCode", sendForgetPassCode);
+router.post("/forgetPassCode", forgetPassword);
+router.post("/logout", User, logout);
 
 export const AuthRoutes = router;

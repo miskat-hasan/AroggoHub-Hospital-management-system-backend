@@ -3,12 +3,6 @@ import { UserModel } from "../user.model";
 
 const patientSchema = new Schema(
   {
-    user_id: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      unique: true,
-    },
     age: Number,
     blood_group: String,
     occupation: String,

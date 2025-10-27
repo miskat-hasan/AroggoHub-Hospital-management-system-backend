@@ -10,8 +10,14 @@ const userSchema = new Schema<IUser>(
     phone: String,
     gender: String,
     address: String,
-    profile_picture: String,
+    profile_picture: {
+      url: String,
+      public_id: String,
+    },
     hospital_id: String,
+    isDeleted: { type: Boolean, default: false },
+    isBlocked: { type: Boolean, default: false },
+    refreshToken: String,
   },
   {
     discriminatorKey: "roleKey",

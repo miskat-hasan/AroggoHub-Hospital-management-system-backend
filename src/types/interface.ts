@@ -8,22 +8,22 @@ export enum UserRole {
   Doctor = "Doctor",
   Patient = "Patient",
   Nurse = "Nurse",
-  LabStaff = "LabStaff"
+  LabStaff = "LabStaff",
 }
 
 export enum AppointmentType {
   Physical = "physical",
-  Online = "online"
+  Online = "online",
 }
 
 export enum BookingSource {
   WalkIn = "walk-in",
-  Website = "website"
+  Website = "website",
 }
 
 export enum AppointmentMode {
   FirstVisit = "first_visit",
-  FollowUp = "followup"
+  FollowUp = "followup",
 }
 
 export enum AppointmentStatus {
@@ -31,58 +31,58 @@ export enum AppointmentStatus {
   Approved = "approved",
   Completed = "completed",
   Cancelled = "cancelled",
-  NoShow = "no_show"
+  NoShow = "no_show",
 }
 
 export enum PaymentStatus {
   Unpaid = "unpaid",
   Paid = "paid",
-  Refunded = "refunded"
+  Refunded = "refunded",
 }
 
 export enum RoomStatus {
   Available = "available",
   Occupied = "occupied",
-  Maintenance = "maintenance"
+  Maintenance = "maintenance",
 }
 
 export enum ConditionStatus {
   Stable = "stable",
   Critical = "critical",
   Recovering = "recovering",
-  Discharged = "discharged"
+  Discharged = "discharged",
 }
 
 export enum ReportStatus {
   Pending = "pending",
   Reviewed = "reviewed",
-  Sent = "sent"
+  Sent = "sent",
 }
 
 export enum PaymentMethod {
   Cash = "cash",
   Card = "card",
   MobileBanking = "mobile_banking",
-  OnlineGateway = "online_gateway"
+  OnlineGateway = "online_gateway",
 }
 
 export enum AssetStatus {
   Available = "available",
   InUse = "in-use",
   Maintenance = "maintenance",
-  Retired = "retired"
+  Retired = "retired",
 }
 
 export enum CommunicationType {
   Email = "email",
   SMS = "sms",
-  Push = "push"
+  Push = "push",
 }
 
 export enum DeliveryStatus {
   Pending = "pending",
   Sent = "sent",
-  Failed = "failed"
+  Failed = "failed",
 }
 
 // ======================================================
@@ -97,7 +97,13 @@ export interface IUser extends Document {
   phone?: string;
   gender?: string;
   address?: string;
-  profile_picture?: string;
+  isBlocked?: boolean;
+  isDeleted?: boolean;
+  profile_picture?: {
+    url: string;
+    public_id: string;
+  };
+  refreshToken?: string;
   hospital_id?: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -108,7 +114,6 @@ export interface IUser extends Document {
 // ======================================================
 
 export interface IDoctor extends IUser {
-  doctor_id: Types.ObjectId;
   department_id?: Types.ObjectId;
   specialization?: string[];
   qualification?: string[];
@@ -116,13 +121,13 @@ export interface IDoctor extends IUser {
   consultation_fee?: number;
   availability_schedule?: string;
   date_of_joining?: Date;
+
   status?: "active" | "on_leave" | "resigned";
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 export interface IPatient extends IUser {
-  patient_id: Types.ObjectId;
   age?: number;
   blood_group?: string;
   height?: number;
@@ -144,7 +149,6 @@ export interface IPatient extends IUser {
 }
 
 export interface IReceptionist extends IUser {
-  receptionist_id: Types.ObjectId;
   assigned_department?: Types.ObjectId;
   shift_time?: string;
   experience_years?: number;
@@ -153,7 +157,6 @@ export interface IReceptionist extends IUser {
 }
 
 export interface INurse extends IUser {
-  nurse_id: Types.ObjectId;
   assigned_department?: Types.ObjectId;
   assigned_room?: Types.ObjectId;
   shift?: string;
@@ -163,7 +166,6 @@ export interface INurse extends IUser {
 }
 
 export interface ILabStaff extends IUser {
-  staff_id: Types.ObjectId;
   department_id?: Types.ObjectId;
   specialization?: string;
   shift?: string;
@@ -173,9 +175,13 @@ export interface ILabStaff extends IUser {
 }
 
 export interface IAdmin extends IUser {
-  admin_id: Types.ObjectId;
   designation?: string;
-  access_level: "super_admin" | "hospital_admin";
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface ISuperAdmin extends IUser {
+  designation?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
